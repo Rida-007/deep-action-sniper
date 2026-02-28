@@ -1,0 +1,150 @@
+# Monorepo .gitignore
+# Covers both Flutter (frontend) and Python (backend)
+
+# ============================================================================
+# FLUTTER / DART (frontend/)
+# ============================================================================
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+*.lock
+*.iml
+*.ipr
+
+# Generated files
+generated_plugin_registrant.cc
+generated_plugin_registrant.h
+GeneratedPluginRegistrant.java
+GeneratedPluginRegistrant.swift
+google-services.json
+GoogleService-Info.plist
+
+# Local environment files
+.env
+.env.local
+
+# IDEs
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+
+# iOS/macOS
+ios/.symlinks/
+ios/.generated/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+macos/Flutter/Flutter-Debug.xcconfig
+macos/Flutter/Flutter-Release.xcconfig
+
+# Android
+android/.gradle/
+android/local.properties
+android/gradle.properties
+android/.idea/
+.gradle/
+
+# Build outputs
+/build/
+/dist/
+*.apk
+*.ipa
+*.app
+
+# ============================================================================
+# PYTHON (backend/)
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+.env
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyCharm
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Testing
+.pytest_cache/
+.coverage/
+htmlcov/
+.tox/
+.hypothesis/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# FastAPI/Uvicorn
+*.log
+*.log.*
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ============================================================================
+# GENERAL
+# ============================================================================
+*.bak
+*.tmp
+*.temp
+*.orig
+.cache/
+.tmp/
+
+# IDE temp files
+*.pid
+*.seed
+*.pid.lock
