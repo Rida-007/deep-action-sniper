@@ -1,10 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import mysql.connector
+from motor.motor_asyncio import AsyncIOMotorClient
 import random
 import os
 from dotenv import load_dotenv
+from bson.objectid import ObjectId
 
 # Load environment variables from .env file
 load_dotenv()
@@ -22,47 +23,36 @@ app.add_middleware(
 
 # Health check endpoint for Railway
 @app.get("/health")
-def health_check():
+async def health_check():
     return {"status": "healthy"}
 
 # Root endpoint
 @app.get("/")
-def read_root():
+async def read_root():
     return {"message": "Deep Action Sniper Backend is running"}
 
-# -----------------------------
-# DATABASE CONNECTION (LAZY LOADING)
-# Only connect when actually needed, not at startup
-# This allows the app to start even if database isn't configured yet
-# -----------------------------
+# MongoDB configuration from env
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+MONGO_DB = os.getenv("MONGO_DB", "deep_action_sniper")
+
+mongo_client: AsyncIOMotorClient | None = None
 db = None
-cursor = None
+snipes_coll = None
 
-def get_db_connection():
-    """Get or create database connection (lazy loading)"""
-    global db, cursor
-    
-    try:
-        if db is None or not db.is_connected():
-            db = mysql.connector.connect(
-                host=os.getenv("DB_HOST", "localhost"),
-                user=os.getenv("DB_USER", "root"),
-                password=os.getenv("DB_PASSWORD", "*123#yolo"),
-                database=os.getenv("DB_NAME", "deep_action_sniper"),
-                autocommit=True
-            )
-            cursor = db.cursor()
-        return db, cursor
-    except mysql.connector.Error as err:
-        print(f"❌ Database connection failed: {err}")
-        raise Exception(f"Could not connect to database: {err}")
+@app.on_event("startup")
+async def startup_db_client():
+    global mongo_client, db, snipes_coll
+    mongo_client = AsyncIOMotorClient(MONGO_URI)
+    db = mongo_client[MONGO_DB]
+    snipes_coll = db.get_collection("snipes")
+    # Ensure indexes if needed
+    await snipes_coll.create_index("created_at")
 
-# Test database connection on startup (optional, logs but doesn't block)
-try:
-    get_db_connection()
-    print("✅ Database connected successfully on startup")
-except Exception as e:
-    print(f"⚠️ Database will connect on first request: {e}")
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    global mongo_client
+    if mongo_client:
+        mongo_client.close()
 
 # -----------------------------
 # DATA MODEL
@@ -75,31 +65,18 @@ class Snipe(BaseModel):
 # ADD NEW SNIPE
 # -----------------------------
 @app.post("/add_snipe")
-def add_snipe(snipe: Snipe):
+async def add_snipe(snipe: Snipe):
     try:
-        db, cursor = get_db_connection()
-        
-        query = """
-        INSERT INTO snipes (url, target_price, current_price, status)
-        VALUES (%s, %s, %s, %s)
-        """
-
-        values = (
-            snipe.url,
-            snipe.target_price,
-            100,  # Starting price (initial)
-            "Active"
-        )
-
-        cursor.execute(query, values)
-        db.commit()
-
-        return {
-            "message": "Snipe added successfully",
-            "id": cursor.lastrowid
+        doc = {
+            "url": snipe.url,
+            "target_price": float(snipe.target_price),
+            "current_price": 100.0,
+            "status": "Active",
         }
+        result = await snipes_coll.insert_one(doc)
+        return {"message": "Snipe added successfully", "id": str(result.inserted_id)}
     except Exception as e:
-        return {"error": f"Failed to add snipe: {str(e)}"}, 500
+        raise HTTPException(status_code=500, detail=str(e))
 
 # -----------------------------
 # GET ALL SNIPES
@@ -107,86 +84,47 @@ def add_snipe(snipe: Snipe):
 @app.get("/get_snipes")
 async def get_snipes():
     try:
-        db, cursor = get_db_connection()
-        
-        cursor.execute("""
-            SELECT id, url, target_price, current_price, status, created_at
-            FROM snipes
-            ORDER BY id DESC
-        """)
-        result = cursor.fetchall()
-
+        cursor = snipes_coll.find().sort("_id", -1)
         snipes_list = []
-
-        for row in result:
-            target_price = float(row[2] or 0)
-            current_price = float(row[3] or 0)
-
-            profit = current_price - target_price
-
+        async for doc in cursor:
             snipes_list.append({
-                "id": row[0],
-                "url": row[1],
-                "target_price": target_price,
-                "current_price": current_price,
-                "profit": profit,
-                "status": row[4] or "Unknown",
-                "created_at": str(row[5]) if row[5] else ""
+                "id": str(doc.get("_id")),
+                "url": doc.get("url"),
+                "target_price": float(doc.get("target_price", 0.0)),
+                "current_price": float(doc.get("current_price", 0.0)),
+                "profit": float(doc.get("current_price", 0.0)) - float(doc.get("target_price", 0.0)),
+                "status": doc.get("status", "Unknown"),
+                "created_at": doc.get("created_at").isoformat() if doc.get("created_at") else "",
             })
-
         return {"snipes": snipes_list}
     except Exception as e:
-        return {"error": f"Failed to fetch snipes: {str(e)}"}, 500
+        raise HTTPException(status_code=500, detail=str(e))
 
 # -----------------------------
-# SIMULATE MARKET (Updated)
+# SIMULATE MARKET
 # -----------------------------
 @app.post("/simulate_market")
-def simulate_market():
+async def simulate_market():
     try:
-        db, cursor = get_db_connection()
-        
-        cursor.execute("SELECT id, target_price, current_price FROM snipes")
-        snipes = cursor.fetchall()
+        cursor = snipes_coll.find()
+        updates = []
+        async for doc in cursor:
+            snipe_id = doc.get("_id")
+            target_price = float(doc.get("target_price", 0.0))
+            current_price = float(doc.get("current_price", 0.0))
 
-        if not snipes:
-            return {"message": "No snipes available"}
-
-        for s in snipes:
-            snipe_id = s[0]
-            target_price = float(s[1] or 0)
-            current_price = float(s[2] or 0)
-
-            # If current price is zero (first simulation), we start near the target
             if current_price == 0:
                 current_price = target_price + random.randint(-30, 30)
 
-            # Gradual market movement (simulating price changes)
             movement = random.randint(-10, 10)
             new_price = current_price + movement
-
-            # Ensure price doesn't go below 1
             if new_price < 1:
                 new_price = 1
 
-            # Check if the target price has been hit
-            if new_price <= target_price:
-                status = "Target Hit"
-            else:
-                status = "Watching"
+            status = "Target Hit" if new_price <= target_price else "Watching"
 
-            # Update the snipes table with the new price and status
-            update_query = """
-            UPDATE snipes
-            SET current_price = %s,
-                status = %s
-            WHERE id = %s
-            """
-
-            cursor.execute(update_query, (new_price, status, snipe_id))
-
-        db.commit()
+            await snipes_coll.update_one({"_id": snipe_id}, {"$set": {"current_price": new_price, "status": status}})
 
         return {"message": "Market simulated successfully"}
     except Exception as e:
-        return {"error": f"Failed to simulate market: {str(e)}"}, 500
+        raise HTTPException(status_code=500, detail=str(e))
