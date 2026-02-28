@@ -6,24 +6,41 @@
 
 ## Basic Details
 
-### Team Name: 
+### Team Name: Cache & Cookie
 
 ### Team Members
-- Member 1:  - 
-- Member 2:  - 
+- Member 1: Rida Waseem - [College of Engineering Vadakara]
+- Member 2: Aswandha R J - [College of Engineering Vadakara]
 
 ### Hosted Project Link
-
+https://drive.google.com/drive/folders/10l7oABCP4BEqehKNdDpa0T1_LfJIRsjN
 
 ### Project Description
 Deep Action Sniper is a cross-platform price monitoring application that allows users to monitor product prices across multiple platforms and receive notifications when prices match their target criteria.
 
 ### The Problem statement
+In today’s online shopping environment, product prices fluctuate frequently. Users often miss the best buying opportunity because they cannot continuously monitor price changes. Manually checking prices multiple times a day is inefficient, time-consuming, and unreliable.
 
+There is a need for a smart system that can:
+	•	Track product prices automatically
+	•	Monitor market changes
+	•	Alert users when their desired price is reached
+	•	Help users make timely purchasing decisions
+
+Without such a system, users risk either overpaying or missing limited-time deals.  
 
 ### The Solution
+Deep Action Sniper provides a smart and automated price-tracking solution.
 
+The application allows users to:
+	•	Add product URLs
+	•	Set a desired target price
+	•	Monitor simulated market price changes
+	•	Automatically detect when the price reaches or falls below the target
 
+The backend handles dynamic price simulation and updates product status to “Target Hit” when conditions are met. The dashboard displays real-time information including current price, target price, and potential savings.
+
+By combining Flutter (frontend), FastAPI (backend), and MySQL (database), the system demonstrates a complete full-stack solution that improves user decision-making through automation and precision.
 ---
 
 ## Technical Details
@@ -35,8 +52,6 @@ Deep Action Sniper is a cross-platform price monitoring application that allows 
 - Frameworks used: Flutter, FastAPI
 - Libraries used: http, cupertino_icons, uvicorn
 - Tools used: VS Code, Git, Flutter SDK, Python
-
----
 
 ## Features
 
@@ -53,15 +68,12 @@ List the key features of your project:
 ### For Software:
 
 #### Installation
-
-**Frontend:**
 ```bash
+# Frontend
 cd frontend
 flutter pub get
-```
 
-**Backend:**
-```bash
+# Backend
 cd backend
 python -m venv venv
 venv\Scripts\activate  # On Windows
@@ -69,71 +81,58 @@ pip install -r requirements.txt
 ```
 
 #### Run
-
-**Frontend (Development):**
 ```bash
+# Frontend (Development)
 cd frontend
 flutter run
-```
 
-**Backend:**
-```bash
+# Backend
 cd backend
 python main.py
 ```
 
----
-
 ## Project Documentation
 
-### For Mobile Apps:
+### For Software:
 
-#### Installation Guide
+#### Screenshots (Add at least 3)
 
-**For Android (APK):**
-1. Build APK from source:
-   ```bash
-   cd frontend
-   flutter build apk --release
-   ```
-2. APK will be generated at: `frontend\build\app\outputs\flutter-apk\app-release.apk`
-3. Enable "Install from Unknown Sources" in your device settings:
-   - Go to Settings > Security
-   - Enable "Unknown Sources"
-4. Open the downloaded APK file
-5. Follow the installation prompts
-6. Open the app and enjoy!
+![Screenshot1](Add screenshot 1 here with proper name)
+*Add caption explaining what this shows*
 
-**For iOS:**
-1. Build iOS app from source:
-   ```bash
-   cd frontend
-   flutter build ios --release
-   ```
-2. Follow Apple's distribution guidelines for app store submission
+![Screenshot2](Add screenshot 2 here with proper name)
+*Add caption explaining what this shows*
 
-**Building from Source:**
-```bash
-# For Android
-flutter build apk --release
+![Screenshot3](Add screenshot 3 here with proper name)
+*Add caption explaining what this shows*
 
-# For iOS
-flutter build ios --release
+#### Diagrams
 
-# For Web
-flutter build web
 
-# For Windows Desktop
-flutter build windows
+**Application Workflow:**
 
-# For Linux Desktop
-flutter build linux
-
-# For macOS Desktop
-flutter build macos
-```
+![Workflow](docs/workflow.png)
+*Add caption explaining your workflow*
 
 ---
+
+
+#### Build Photos
+
+![Team](Add photo of your team here)
+
+![Components](Add photo of your components here)
+*List out all components shown*
+
+![Build](Add photos of build process here)
+*Explain the build steps*
+
+![Final](Add photo of final product here)
+*Explain the final build*
+
+---
+
+## Additional Documentation
 
 ### For Web Projects with Backend:
 
@@ -171,146 +170,250 @@ flutter build macos
 }
 ```
 
+[Add more endpoints as needed...]
+
 ---
 
-## Architecture
+### For Mobile Apps:
 
-### System Components
+#### App Flow Diagram
 
-- **Frontend**: Flutter application handling UI, user input, and API communication
-- **Backend**: FastAPI REST API managing price data and snipe records
-- **Database**: 
+![App Flow](docs/app-flow.png)
+*Explain the user flow through your application*
 
-### Technologies Stack
+#### Installation Guide
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Flutter (Dart) |
-| Backend | FastAPI (Python) |
-| Server | Uvicorn |
+**For Android (APK):**
+1. Download the APK from [Release Link]
+2. Enable "Install from Unknown Sources" in your device settings:
+   - Go to Settings > Security
+   - Enable "Unknown Sources"
+3. Open the downloaded APK file
+4. Follow the installation prompts
+5. Open the app and enjoy!
+
+**For iOS (IPA) - TestFlight:**
+1. Download TestFlight from the App Store
+2. Open this TestFlight link: [Your TestFlight Link]
+3. Click "Install" or "Accept"
+4. Wait for the app to install
+5. Open the app from your home screen
+
+**Building from Source:**
+```bash
+# For Android
+flutter build apk
+# or
+./gradlew assembleDebug
+
+# For iOS
+flutter build ios
+# or
+xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
+```
+
+---
+
+### For Hardware Projects:
+
+#### Bill of Materials (BOM)
+
+| Component | Quantity | Specifications | Price | Link/Source |
+|-----------|----------|----------------|-------|-------------|
+| Arduino Uno | 1 | ATmega328P, 16MHz | ₹450 | [Link] |
+| LED | 5 | Red, 5mm, 20mA | ₹5 each | [Link] |
+| Resistor | 5 | 220Ω, 1/4W | ₹1 each | [Link] |
+| Breadboard | 1 | 830 points | ₹100 | [Link] |
+| Jumper Wires | 20 | Male-to-Male | ₹50 | [Link] |
+| [Add more...] | | | | |
+
+**Total Estimated Cost:** ₹[Amount]
+
+#### Assembly Instructions
+
+**Step 1: Prepare Components**
+1. Gather all components listed in the BOM
+2. Check component specifications
+3. Prepare your workspace
+![Step 1](images/assembly-step1.jpg)
+*Caption: All components laid out*
+
+**Step 2: Build the Power Supply**
+1. Connect the power rails on the breadboard
+2. Connect Arduino 5V to breadboard positive rail
+3. Connect Arduino GND to breadboard negative rail
+![Step 2](images/assembly-step2.jpg)
+*Caption: Power connections completed*
+
+**Step 3: Add Components**
+1. Place LEDs on breadboard
+2. Connect resistors in series with LEDs
+3. Connect LED cathodes to GND
+4. Connect LED anodes to Arduino digital pins (2-6)
+![Step 3](images/assembly-step3.jpg)
+*Caption: LED circuit assembled*
+
+**Step 4: [Continue for all steps...]**
+
+**Final Assembly:**
+![Final Build](images/final-build.jpg)
+*Caption: Completed project ready for testing*
+
+---
+
+### For Scripts/CLI Tools:
+
+#### Command Reference
+
+**Basic Usage:**
+```bash
+python script.py [options] [arguments]
+```
+
+**Available Commands:**
+- `command1 [args]` - Description of what command1 does
+- `command2 [args]` - Description of what command2 does
+- `command3 [args]` - Description of what command3 does
+
+**Options:**
+- `-h, --help` - Show help message and exit
+- `-v, --verbose` - Enable verbose output
+- `-o, --output FILE` - Specify output file path
+- `-c, --config FILE` - Specify configuration file
+- `--version` - Show version information
+
+**Examples:**
+
+```bash
+# Example 1: Basic usage
+python script.py input.txt
+
+# Example 2: With verbose output
+python script.py -v input.txt
+
+# Example 3: Specify output file
+python script.py -o output.txt input.txt
+
+# Example 4: Using configuration
+python script.py -c config.json --verbose input.txt
+```
+
+#### Demo Output
+
+**Example 1: Basic Processing**
+
+**Input:**
+```
+This is a sample input file
+with multiple lines of text
+for demonstration purposes
+```
+
+**Command:**
+```bash
+python script.py sample.txt
+```
+
+**Output:**
+```
+Processing: sample.txt
+Lines processed: 3
+Characters counted: 86
+Status: Success
+Output saved to: output.txt
+```
+
+**Example 2: Advanced Usage**
+
+**Input:**
+```json
+{
+  "name": "test",
+  "value": 123
+}
+```
+
+**Command:**
+```bash
+python script.py -v --format json data.json
+```
+
+**Output:**
+```
+[VERBOSE] Loading configuration...
+[VERBOSE] Parsing JSON input...
+[VERBOSE] Processing data...
+{
+  "status": "success",
+  "processed": true,
+  "result": {
+    "name": "test",
+    "value": 123,
+    "timestamp": "2024-02-07T10:30:00"
+  }
+}
+[VERBOSE] Operation completed in 0.23s
+```
 
 ---
 
 ## Project Demo
 
 ### Video
-
+[Add your demo video link here - YouTube, Google Drive, etc.]
 
 *Explain what the video demonstrates - key features, user flow, technical highlights*
 
 ### Additional Demos
+[Add any extra demo materials/links - Live site, APK download, online demo, etc.]
 
+---
+
+## AI Tools Used (Optional - For Transparency Bonus)
+
+If you used AI tools during development, document them here for transparency:
+
+**Tool Used:** [e.g., GitHub Copilot, v0.dev, Cursor, ChatGPT, Claude]
+
+**Purpose:** [What you used it for]
+- Example: "Generated boilerplate React components"
+- Example: "Debugging assistance for async functions"
+- Example: "Code review and optimization suggestions"
+
+**Key Prompts Used:**
+- "Create a REST API endpoint for user authentication"
+- "Debug this async function that's causing race conditions"
+- "Optimize this database query for better performance"
+
+**Percentage of AI-generated code:** [Approximately X%]
+
+**Human Contributions:**
+- Architecture design and planning
+- Custom business logic implementation
+- Integration and testing
+- UI/UX design decisions
+
+*Note: Proper documentation of AI usage demonstrates transparency and earns bonus points in evaluation!*
 
 ---
 
 ## Team Contributions
 
-- [Name 1]: 
-- [Name 2]: 
+- [Name 1]: [Specific contributions - e.g., Frontend development, API integration, etc.]
+- [Name 2]: [Specific contributions - e.g., Backend development, Database design, etc.]
+- [Name 3]: [Specific contributions - e.g., UI/UX design, Testing, Documentation, etc.]
 
 ---
 
 ## License
 
-This project is licensed under the  License - see the LICENSE file for details.
+This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
+
+**Common License Options:**
+- MIT License (Permissive, widely used)
+- Apache 2.0 (Permissive with patent grant)
+- GPL v3 (Copyleft, requires derivative works to be open source)
 
 ---
 
 Made with ❤️ at TinkerHub
-
-### Frontend API URL
-Edit `frontend/lib/main.dart` line 43:
-```dart
-static const String backendUrl = "http://192.168.68.105:8000";
-```
-
-Change `192.168.68.105` to your backend's IP address or hostname.
-
-### Backend Port
-Edit `backend/main.py` to change the port from default 8000.
-
----
-
-## 📊 API Endpoints
-
-### GET /get_snipes
-Fetch all active snipes
-- **Response**: 
-  ```json
-  {
-    "snipes": [
-      {
-        "id": 1,
-        "url": "https://example.com/product",
-        "target_price": 29.99,
-        "current_price": 34.99,
-        "status": "Monitoring"
-      }
-    ]
-  }
-  ```
-
-### POST /add_snipe
-Add a new price snipe
-- **Request Body**:
-  ```json
-  {
-    "url": "https://example.com/product",
-    "target_price": 29.99
-  }
-  ```
-- **Response**: 
-  ```json
-  {
-    "success": true,
-    "message": "Snipe added successfully"
-  }
-  ```
-
----
-
-## 🐛 Troubleshooting
-
-### Frontend can't reach backend
-1. Verify backend is running on the correct IP/port
-2. Check `frontend/lib/main.dart` for correct backend URL
-3. Ensure devices are on the same network
-4. Check Flutter console logs for detailed error messages
-
-**Frontend now includes detailed logging**:
-- Look for `[SNIPER_APP]` messages in the Flutter console
-- Logs show network requests, responses, timeouts, and validation errors
-
-### Backend not responding
-- Check if `python main.py` is running
-- Verify port 8000 is not in use
-- Check Python version (requires 3.11+)
-
----
-
-## 📝 Development Notes
-
-- **Original Frontend Location**: `c:\Users\Rida\deep_action_sniper`
-- **Original Backend Location**: `c:\Users\Rida\deep_action_sniper_backend`
-- **Monorepo Root**: `c:\Users\Rida\deep_action_sniper_monorepo`
-
-This is a **copy-based monorepo**, not moved. Original project folders remain unchanged.
-
----
-
-## 📚 References
-
-- [Flutter Documentation](https://flutter.dev/docs)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [Dart Language Guide](https://dart.dev/guides)
-- [Python Guide](https://docs.python.org/3/)
-
----
-
-## 📄 License
-
-ISC
-
----
-
-**Last Updated**: February 28, 2026
