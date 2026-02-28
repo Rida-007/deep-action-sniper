@@ -97,21 +97,21 @@ python main.py
 
 #### Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+https://drive.google.com/file/d/1Eo1LsSldXi5Cu0_XTQQwAimUOyN-NSRP/view?usp=drivesdk Add screenshot 1 here with proper name
+This screenshot shows our backend API endpoint for adding a new product to track in Deep Action Sniper.
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+https://drive.google.com/file/d/1oXhGTgRRfoIYDscGjChpEjvO7ZM7-vGP/view?usp=drivesdk(Add screenshot 2 here with proper name)
+This screenshot shows the frontend UI where users view tracked products and add a new product to monitor with a target price.
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+https://drive.google.com/file/d/1Xn2GZCHw_ZiuazbeLL9WZyIga72ovVoF/view?usp=drivesdk![Screenshot3](Add screenshot 3 here with proper name)
+This screenshot represents the product tracking list screen where users can monitor multiple snipes and check their status in real time.
 
 #### Diagrams
 
 
 **Application Workflow:**
 
-![Workflow](docs/workflow.png)
+https://drive.google.com/file/d/1M7zXbc3_rTz8DnH8ksQbQNYVpGElicda/view?usp=drivesdk(docs/workflow.png)
 *Add caption explaining your workflow*
 
 ---
@@ -360,7 +360,7 @@ python script.py -v --format json data.json
 ## Project Demo
 
 ### Video
-[Add your demo video link here - YouTube, Google Drive, etc.]
+https://drive.google.com/file/d/1S8FmJBXosY5AI4uEFyozbCZ7CQqf8Ajd/view?usp=drivesdk
 
 *Explain what the video demonstrates - key features, user flow, technical highlights*
 
