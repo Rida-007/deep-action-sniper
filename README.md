@@ -1,102 +1,222 @@
-# Deep Action Sniper - Monorepo
+<p align="center">
+  <img src="./img.png" alt="Project Banner" width="100%">
+</p>
 
-A cross-platform price monitoring application with Flutter frontend and Python FastAPI backend.
+# Deep Action Sniper 🎯
 
-## 📁 Repository Structure
+## Basic Details
 
-```
-deep_action_sniper_monorepo/
-├── frontend/                    # Flutter cross-platform application
-│   ├── lib/                     # Dart source code
-│   ├── android/                 # Android native code
-│   ├── ios/                     # iOS native code
-│   ├── web/                     # Web (Flutter Web)
-│   ├── windows/                 # Windows desktop
-│   ├── linux/                   # Linux desktop
-│   ├── macos/                   # macOS desktop
-│   ├── test/                    # Dart tests
-│   ├── pubspec.yaml             # Flutter dependencies
-│   └── README.md                # Frontend documentation
-│
-└── backend/                     # FastAPI Python backend
-    ├── main.py                  # FastAPI application
-    └── requirements.txt         # Python dependencies (if exists)
-```
+### Team Name: 
 
-## 🎯 Project Overview
+### Team Members
+- Member 1:  - 
+- Member 2:  - 
 
-### Frontend (Flutter)
-- **Platforms**: Android, iOS, Web, Windows, Linux, macOS
-- **Language**: Dart
-- **Framework**: Flutter
-- **Key Dependencies**: 
-  - `http` - HTTP client for API calls
-  - `cupertino_icons` - iOS-style icons
+### Hosted Project Link
 
-**Location**: `frontend/`
 
-**Setup**:
+### Project Description
+Deep Action Sniper is a cross-platform price monitoring application that allows users to monitor product prices across multiple platforms and receive notifications when prices match their target criteria.
+
+### The Problem statement
+
+
+### The Solution
+
+
+---
+
+## Technical Details
+
+### Technologies/Components Used
+
+**For Software:**
+- Languages used: Dart, Python
+- Frameworks used: Flutter, FastAPI
+- Libraries used: http, cupertino_icons, uvicorn
+- Tools used: VS Code, Git, Flutter SDK, Python
+
+---
+
+## Features
+
+List the key features of your project:
+- Feature 1: Cross-platform compatibility (Android, iOS, Web, Windows, Linux, macOS)
+- Feature 2: Real-time price monitoring and tracking
+- Feature 3: Add and manage price snipes with target URLs and prices
+- Feature 4: RESTful API backend with FastAPI
+
+---
+
+## Implementation
+
+### For Software:
+
+#### Installation
+
+**Frontend:**
 ```bash
 cd frontend
 flutter pub get
-flutter run
 ```
 
-### Backend (FastAPI)
-- **Language**: Python
-- **Framework**: FastAPI with Uvicorn
-- **Port**: 8000 (by default, configurable at `192.168.68.105:8000`)
-- **Main Endpoints**:
-  - `GET /get_snipes` - Fetch all price snipes
-  - `POST /add_snipe` - Add new price snipe
-
-**Location**: `backend/`
-
-**Setup**:
+**Backend:**
 ```bash
 cd backend
 python -m venv venv
 venv\Scripts\activate  # On Windows
 pip install -r requirements.txt
+```
+
+#### Run
+
+**Frontend (Development):**
+```bash
+cd frontend
+flutter run
+```
+
+**Backend:**
+```bash
+cd backend
 python main.py
 ```
 
 ---
 
-## 🚀 Getting Started
+## Project Documentation
 
-### Prerequisites
-- **Flutter SDK** (for frontend development) - https://flutter.dev/docs/get-started/install
-- **Python 3.11+** (for backend) - https://www.python.org/downloads/
-- **Git** - Version control
+### For Mobile Apps:
 
-### Quick Start
+#### Installation Guide
 
-1. **Clone/download this monorepo**
-   ```bash
-   cd deep_action_sniper_monorepo
-   ```
-
-2. **Start the Backend**
-   ```bash
-   cd backend
-   python -m venv venv
-   venv\Scripts\activate
-   pip install -r requirements.txt
-   python main.py
-   ```
-   Backend will run on `http://192.168.68.105:8000`
-
-3. **Start the Frontend**
+**For Android (APK):**
+1. Build APK from source:
    ```bash
    cd frontend
-   flutter pub get
-   flutter run
+   flutter build apk --release
    ```
+2. APK will be generated at: `frontend\build\app\outputs\flutter-apk\app-release.apk`
+3. Enable "Install from Unknown Sources" in your device settings:
+   - Go to Settings > Security
+   - Enable "Unknown Sources"
+4. Open the downloaded APK file
+5. Follow the installation prompts
+6. Open the app and enjoy!
+
+**For iOS:**
+1. Build iOS app from source:
+   ```bash
+   cd frontend
+   flutter build ios --release
+   ```
+2. Follow Apple's distribution guidelines for app store submission
+
+**Building from Source:**
+```bash
+# For Android
+flutter build apk --release
+
+# For iOS
+flutter build ios --release
+
+# For Web
+flutter build web
+
+# For Windows Desktop
+flutter build windows
+
+# For Linux Desktop
+flutter build linux
+
+# For macOS Desktop
+flutter build macos
+```
 
 ---
 
-## 🔧 Configuration
+### For Web Projects with Backend:
+
+#### API Documentation
+
+**Base URL:** `http://localhost:8000` (local development)
+
+##### Endpoints
+
+**GET /get_snipes**
+- **Description:** Fetch all active price snipes
+- **Parameters:** None
+- **Response:**
+```json
+{
+  "status": "success",
+  "data": []
+}
+```
+
+**POST /add_snipe**
+- **Description:** Add a new price snipe to monitor
+- **Request Body:**
+```json
+{
+  "url": "https://example.com/product",
+  "target_price": 99.99
+}
+```
+- **Response:**
+```json
+{
+  "status": "success",
+  "message": "Snipe added successfully"
+}
+```
+
+---
+
+## Architecture
+
+### System Components
+
+- **Frontend**: Flutter application handling UI, user input, and API communication
+- **Backend**: FastAPI REST API managing price data and snipe records
+- **Database**: 
+
+### Technologies Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Flutter (Dart) |
+| Backend | FastAPI (Python) |
+| Server | Uvicorn |
+
+---
+
+## Project Demo
+
+### Video
+
+
+*Explain what the video demonstrates - key features, user flow, technical highlights*
+
+### Additional Demos
+
+
+---
+
+## Team Contributions
+
+- [Name 1]: 
+- [Name 2]: 
+
+---
+
+## License
+
+This project is licensed under the  License - see the LICENSE file for details.
+
+---
+
+Made with ❤️ at TinkerHub
 
 ### Frontend API URL
 Edit `frontend/lib/main.dart` line 43:
