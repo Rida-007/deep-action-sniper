@@ -1,0 +1,12 @@
+frontend/
+.git/
+.gitignore
+README.md
+SETUP_CHECKLIST.md
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
