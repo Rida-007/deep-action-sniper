@@ -42,7 +42,14 @@ class _SniperDashboardScreenState extends State<SniperDashboardScreen> {
   Timer? _timer;
 
   // Configuration
-  static const String backendUrl = "http://192.168.68.105:8000";
+  // 🔴 IMPORTANT: Replace with your actual Railway backend URL
+  // Configuration
+  // Use build-time define to set the backend URL. Example:
+  // flutter build apk --release --dart-define=BACKEND_URL="https://your-railway-app.up.railway.app"
+  static const String backendUrl = String.fromEnvironment(
+    'BACKEND_URL',
+    defaultValue: 'https://your-railway-app-name.up.railway.app',
+  );
   late final String apiUrl = "$backendUrl/get_snipes";
   late final String addApi = "$backendUrl/add_snipe";
   static const Duration requestTimeout = Duration(seconds: 10);
